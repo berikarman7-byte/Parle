@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff">
+
+    <title>ParleAI — Français</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- HEADER -->
+    <header class="header">
+
+        <div>
+            <div class="logo">
+                🇫🇷 ParleAI
+            </div>
+
+            <div class="small-text">
+                Français • Vocabulaire
+            </div>
+        </div>
+
+        <button class="icon-button" onclick="toggleTheme()">
+            🌙
+        </button>
+
+    </header>
+
+
+    <!-- HOME -->
+    <main id="homePage" class="page">
+
+        <section class="welcome">
+
+            <div class="welcome-text">
+
+                <p class="hello">
+                    Bonjour 👋
+                </p>
+
+                <h1>
+                    Учим французский
+                </h1>
+
+                <p>
+                    Слова, повторение и тесты.
+                </p>
+
+            </div>
+
+            <div class="flag">
+                🇫🇷
+            </div>
+
+        </section>
+
+
+        <!-- PROGRESS -->
+
+        <section class="card progress-card">
+
+            <div class="card-top">
+
+                <div>
+                    <span class="label">
+                        Твой прогресс
+                    </span>
+
+                    <h2 id="progressPercent">
+                        0%
+                    </h2>
+                </div>
+
+                <div class="xp">
+                    ⭐ <span id="xpValue">0</span> XP
+                </div>
+
+            </div>
+
+            <div class="progress-track">
+
+                <div
+                    id="progressBar"
+                    class="progress-fill">
+                </div>
+
+            </div>
+
+            <div class="progress-info">
+
+                <span>
+                    Изучено: <b id="learnedCount">0</b>
+                </span>
+
+                <span>
+                    Всего: <b id="totalCount">0</b>
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- MENU -->
+
+        <h2 class="section-title">
+            Учиться
+        </h2>
+
+        <div class="menu-grid">
+
+            <button
+                class="menu-card"
+                onclick="openPage('wordsPage')">
+
+                <span class="menu-icon">
+                    📚
+                </span>
+
+                <span class="menu-title">
+                    Слова
+                </span>
+
+                <span class="menu-description">
+                    Изучать французские слова
+                </span>
+
+            </button>
+
+
+            <button
+                class="menu-card"
+                onclick="openPage('reviewPage')">
+
+                <span class="menu-icon">
+                    🧠
+                </span>
+
+                <span class="menu-title">
+                    Повторение
+                </span>
+
+                <span class="menu-description">
+                    Повторить изученное
+                </span>
+
+            </button>
+
+
+            <button
+                class="menu-card"
+                onclick="startQuiz()">
+
+                <span class="menu-icon">
+                    🎯
+                </span>
+
+                <span class="menu-title">
+                    Тест
+                </span>
+
+                <span class="menu-description">
+                    Проверь свои знания
+                </span>
+
+            </button>
+
+
+            <button
+                class="menu-card"
+                onclick="openPage('favoritesPage')">
+
+                <span class="menu-icon">
+                    ❤️
+                </span>
+
+                <span class="menu-title">
+                    Избранное
+                </span>
+
+                <span class="menu-description">
+                    Любимые слова
+                </span>
+
+            </button>
+
+        </div>
+
+
+        <!-- DAILY -->
+
+        <h2 class="section-title">
+            Сегодня
+        </h2>
+
+        <section class="card daily-card">
+
+            <div class="daily-icon">
+                🔥
+            </div>
+
+            <div class="daily-content">
+
+                <h3>
+                    Дневная цель
+                </h3>
+
+                <p>
+                    Изучи 10 новых слов сегодня.
+                </p>
+
+                <div class="mini-progress">
+
+                    <div
+                        id="dailyProgress"
+                        class="mini-fill">
+                    </div>
+
+                </div>
+
+                <small id="dailyText">
+                    0 / 10 слов
+                </small>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- WORDS -->
+
+    <main id="wordsPage" class="page hidden">
+
+        <div class="page-header">
+
+            <button
+                class="back-button"
+                onclick="goHome()">
+                ←
+            </button>
+
+            <h1>
+                Слова
+            </h1>
+
+        </div>
+
+
+        <div class="search-box">
+
+            🔍
+
+            <input
+                id="searchInput"
+                type="text"
+                placeholder="Поиск слова..."
+                oninput="searchWords()">
+
+        </div>
+
+
+        <div class="category-row">
+
+            <button
+                class="category active"
+                onclick="filterCategory('all', this)">
+                Все
+            </button>
+
+            <button
+                class="category"
+                onclick="filterCategory('basic', this)">
+                Основные
+            </button>
+
+            <button
+                class="category"
+                onclick="filterCategory('people', this)">
+                Люди
+            </button>
+
+            <button
+                class="category"
+                onclick="filterCategory('food', this)">
+                Еда
+            </button>
+
+        </div>
+
+
+        <div
+            id="wordList"
+            class="word-list">
+        </div>
+
+    </main>
+
+
+    <!-- REVIEW -->
+
+    <main id="reviewPage" class="page hidden">
+
+        <div class="page-header">
+
+            <button
+                class="back-button"
+                onclick="goHome()">
+                ←
+            </button>
+
+            <h1>
+                Повторение
+            </h1>
+
+        </div>
+
+
+        <section class="flashcard-container">
+
+            <div
+                id="flashcard"
+                class="flashcard"
+                onclick="flipCard()">
+
+                <div
+                    id="flashFront"
+                    class="flash-front">
+
+                    <span class="flash-label">
+                        Французский
+                    </span>
+
+                    <h2 id="flashFrench">
+                        Bonjour
+                    </h2>
+
+                    <p>
+                        Нажми, чтобы перевернуть
+                    </p>
+
+                </div>
+
+                <div
+                    id="flashBack"
+                    class="flash-back hidden">
+
+                    <span class="flash-label">
+                        Перевод
+                    </span>
+
+                    <h2 id="flashRussian">
+                        Здравствуйте
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="review-buttons">
+
+                <button
+                    class="review-button wrong"
+                    onclick="reviewAnswer(false)">
+                    ❌ Не знаю
+                </button>
+
+                <button
+                    class="review-button correct"
+                    onclick="reviewAnswer(true)">
+                    ✅ Знаю
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FAVORITES -->
+
+    <main id="favoritesPage" class="page hidden">
+
+        <div class="page-header">
+
+            <button
+                class="back-button"
+                onclick="goHome()">
+                ←
+            </button>
+
+            <h1>
+                Избранное ❤️
+            </h1>
+
+        </div>
+
+
+        <div
+            id="favoritesList"
+            class="word-list">
+        </div>
+
+    </main>
+
+
+    <!-- QUIZ -->
+
+    <main id="quizPage" class="page hidden">
+
+        <div class="page-header">
+
+            <button
+                class="back-button"
+                onclick="goHome()">
+                ←
+            </button>
+
+            <h1>
+                Тест 🎯
+            </h1>
+
+        </div>
+
+
+        <section class="quiz-card">
+
+            <div class="quiz-counter">
+                Вопрос <span id="quizNumber">1</span> / 10
+            </div>
+
+            <h2 id="quizQuestion">
+                Что означает Bonjour?
+            </h2>
+
+            <div
+                id="quizAnswers"
+                class="quiz-answers">
+            </div>
+
+            <div
+                id="quizResult"
+                class="quiz-result">
+            </div>
+
+        </section>
+
+    </main>
+
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
